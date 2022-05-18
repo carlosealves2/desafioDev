@@ -47,6 +47,7 @@ services:
   nginx:
     image: nginx
     container_name: nginx_server
+    restart: always
     build:
       context: ./nginx
       dockerfile: Dockerfile
