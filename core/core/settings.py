@@ -37,6 +37,14 @@ ADMIN_ENABLED = False
 
 # Application definition
 
+APPLICATION_APPS = [
+    "accounts",
+]
+
+THIRDPARTY_APPS = [
+
+]
+
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -44,7 +52,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-]
+] + THIRDPARTY_APPS + APPLICATION_APPS
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -134,3 +142,6 @@ STATIC_URL = '/static/'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# custom user set
+AUTH_USER_MODEL = "accounts.User"
