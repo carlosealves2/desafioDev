@@ -26,3 +26,29 @@ class Product(models.Model):
 
         return super(Product, self).save(force_insert=False, force_update=False, using=None,
                                          update_fields=None)
+
+
+class Order(models.Model):
+    STATUS = (
+        ('p', 'Pending to send'),
+        ('s', 'Sending'),
+        ('d', 'Delivered'),
+    )
+
+    product = models.ForeignKey(Product, on_delete=models.SET_NULL, null=True, verbose_name=_("Product"))
+    quantity = models.IntegerField(_("Quantity"))
+    unitary_value = models.DecimalField(_("Unitary value"), max_digits=10, decimal_places=2)
+    created_at = models.DateTimeField(auto_now_add=True, verbose_name=_("Order date"))
+    applicant = models.CharField(_('Applicant'), max_length=150)
+    zip_code = models.IntegerField(_("Zip code"))
+    uf = models.CharField(_("Federation unity"), max_length=2)
+    city = models.CharField(_("City"), max_length=100)
+    district = models.CharField(_("District"), max_length=100)
+    street = models.CharField(_("Street"), max_length=200)
+    number = models.IntegerField(_("Street"))
+    forwarding_agent = models.CharField(_("Street"), max_length=200)
+    order_situation = models.CharField(choices=STATUS, max_length=1, verbose_name=_("Order situation"), default='p')
+
+    def __str__(self):
+        return f"<Order, product: {self.product}, quantity: {self.quantity}, " \
+               f"unitary value: {self.unitary_value}, status: {self.order_situation}>"
