@@ -39,6 +39,7 @@ ADMIN_ENABLED = False
 
 APPLICATION_APPS = [
     "accounts",
+    "orders"
 ]
 
 THIRDPARTY_APPS = [
