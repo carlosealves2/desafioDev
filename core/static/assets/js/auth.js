@@ -36,3 +36,22 @@ function logout() {
     .then(json => console.log(json))
 
 }
+
+
+function isAuth() {
+    let token = localStorage.getItem('token')
+    if (token) {
+        fetch("/auth/users/me/", {
+            method: "POST",
+            headers: {
+                "Authorization": `Token ${token}`
+            }
+        })
+        .then(data => {
+            if (data.status === 401) {
+                localStorage.removeItem('token')
+                ToastNotification("Auth status", "Your login has expired.")
+            }
+        })
+    }
+}
