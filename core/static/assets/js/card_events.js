@@ -63,3 +63,8 @@ function deleteChecked() {
 }
 
 
+document.querySelectorAll("input[type='checkbox']").forEach(ele => {
+    ele.addEventListener('change', toggleActionButtons)
+})
+
+document.querySelector("#btn_delete").addEventListener('click', deleteChecked)
