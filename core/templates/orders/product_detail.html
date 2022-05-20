@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+  <div class="display-5 mx-5 my-5 text-end">Product detail</div>
+  <div class="row justify-content-center">
+      <div class="col">
+          <h4>{{object.name}}</h4>
+          <hr>
+          <h5 class="bg-dark text-white">Price: R$ {{object.unitary_value}}</h5>
+          <h5>Quantity: {{object.quantity_stock}}</h5>
+          <p>Situation: {{object.get_product_situation_display}}</p>
+          <a href="{% url 'app:products' %}" class="btn btn-secondary">Back to products</a>
+      </div>
+  </div>
+</div>
+{% endblock content %}

@@ -1,2 +1,4 @@
 venv/
 .idea/
+core/static/admin/
+core/static/rest_framework/

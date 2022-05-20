@@ -1,3 +1,4 @@
+from django.urls import reverse
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 
@@ -27,6 +28,9 @@ class Product(models.Model):
         return super(Product, self).save(force_insert=False, force_update=False, using=None,
                                          update_fields=None)
 
+    def get_absolute_url(self):
+        return reverse("app:product_detail", kwargs={"pk": self.pk})
+    
 
 class Order(models.Model):
     STATUS = (
