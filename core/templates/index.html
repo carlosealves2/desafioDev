@@ -1,8 +1,12 @@
 {% extends 'base.html' %}
-
+{% load static %}
 {% block title %}
 Home
 {% endblock title %}
+
+{% block styles %}
+<link rel="stylesheet" href="{% static 'assets/css/index.css' %}">
+{% endblock styles %}
 
 {% block content %}
 <div class="row">
