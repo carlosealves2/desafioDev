@@ -1,0 +1,68 @@
+{% extends 'base.html' %} {% block title %} Products {% endblock title %} {%block content %}
+<div class="container">
+  <div class="display-5 mx-5 my-5 text-end">Products</div>
+  <ul class="nav bg-dark px-2 py-2 justify-content-end rounded-1">
+    <li class="nav-item">
+        <button type="button" class="btn btn-outline-light">New</button>
+    </li>
+    <li class="nav-item px-2">
+        <button type="button" class="btn btn-outline-light disabled">Delete</button>
+    </li>
+    <li class="nav-item">
+        <button type="button" class="btn btn-outline-light disabled">Edit</button>
+    </li>
+  </ul>
+  {% if product_list|length > 0 %}
+    <div class="container-fluid custom-grid mx-2 my-2">
+  {% else %}
+    <div class="container-fluid mx-2 my-2">
+  {% endif %}
+  
+    {% for product in product_list %}
+      <div class="card" style="width: 18rem">
+        <div class="card-body">
+          <h5 class="card-title">
+            <div class="row">
+              <div class="col d-flex justify-content-end w-100">
+                <input type="checkbox" name="" id="" data-product-id="1" />
+              </div>
+            </div>
+          </h5>
+          <h6 class="card-subtitle mb-2 text-muted"></h6>
+          <p class="card-text">product title</p>
+          <p class="text-end">
+            <button
+              class="btn"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#collapseExample"
+              aria-expanded="false"
+              aria-controls="collapseExample"
+            >
+              <span class="material-symbols-outlined"> arrow_circle_down </span>
+            </button>
+          </p>
+          <div class="collapse" id="collapseExample">
+            <div class="card card-body">
+              <div class="row">
+                <div class="col">Quantity</div>
+                <div class="col">9</div>
+              </div>
+              <div class="row">
+                <div class="col">Unitary Value</div>
+                <div class="col">1252.99</div>
+              </div>
+              <div class="row">
+                  <div class="col">Situation</div>
+                  <div class="col">avaliable</div>
+                </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    {% empty %}
+      <h5 class="text-center">Not products</h5>
+    {% endfor %}  
+    </div>
+</div>
+{% endblock content %}
