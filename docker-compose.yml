@@ -58,12 +58,15 @@ services:
       - pgadmin
     networks:
       - internal_network
+    volumes:
+      - ./core/static:/static_django/
 
 volumes:
   pg_data:
     driver: local
   pg_admin_data:
     driver: local
+
 
 networks:
   internal_network:

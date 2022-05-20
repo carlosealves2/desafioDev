@@ -1,0 +1,77 @@
+{% extends 'base.html' %} {% load static %} {% block title %} Products {% endblock title %} {%block content %}
+<div class="container">
+  <div class="display-5 mx-5 my-5 text-end">Products</div>
+  <ul class="nav bg-dark px-2 py-2 justify-content-end rounded-1">
+    <li class="nav-item">
+        <button type="button" class="btn btn-outline-light">New</button>
+    </li>
+    <li class="nav-item px-2">
+        <button id="btn_delete" type="button" class="btn btn-outline-light disabled">Delete</button>
+    </li>
+    <li class="nav-item">
+        <button id="btn_edit" type="button" class="btn btn-outline-light disabled">Edit</button>
+    </li>
+  </ul>
+  {% if product_list|length > 0 %}
+    <div class="container-fluid custom-grid mx-2 my-2">
+  {% else %}
+    <div class="container-fluid mx-2 my-2">
+  {% endif %}
+  
+    {% for product in product_list %}
+      {% if product.product_situation == "av" %}
+      <div id="prod_id_{{ product.id }}" class="card" style="width: 18rem">
+      {% else %}
+      <div id="prod_id_{{ product.id }}" class="card border-danger mb-3" style="width: 18rem">
+      {% endif %}
+        <div class="card-body">
+          <h5 class="card-title">
+            <div class="row">
+              <div class="col d-flex justify-content-end w-100">
+                <input type="checkbox" name="" id="" data-product-id="{{ product.id }}" />
+              </div>
+            </div>
+          </h5>
+          <h6 class="card-subtitle mb-2 text-muted"></h6>
+          <p class="card-text">{{ product.name }}</p>
+          <p class="text-end">
+            <button
+              class="btn"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#collapse_id_{{ product.id }}"
+              aria-expanded="false"
+              aria-controls="collapse_id_{{ product.id }}"
+            >
+              <span class="material-symbols-outlined"> arrow_circle_down </span>
+            </button>
+          </p>
+          <div class="collapse" id="collapse_id_{{ product.id }}">
+            <div class="card card-body">
+              <div class="row">
+                <div class="col">Quantity</div>
+                <div class="col">{{ product.quantity_stock }}</div>
+              </div>
+              <div class="row">
+                <div class="col">Unitary Value</div>
+                <div class="col">{{ product.unitary_value }}</div>
+              </div>
+              <div class="row">
+                  <div class="col">Situation</div>
+                  <div class="col">{{ product.get_product_situation_display }}</div>
+                </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    {% empty %}
+      <h5 class="text-center">Not products</h5>
+    {% endfor %}  
+    </div>
+</div>
+
+
+
+<script src="{% static 'assets/js/card_events.js' %}"></script>
+
+{% endblock content %}

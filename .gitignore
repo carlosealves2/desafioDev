@@ -301,3 +301,9 @@ cython_debug/
 
 ### pycharm ###
 .idea/
+
+### static files from admin ###
+core/static/admin/
+
+### static files from rest_framework ###
+core/static/rest_framework/
