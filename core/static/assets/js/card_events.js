@@ -62,9 +62,17 @@ function deleteChecked() {
     .catch(err => console.error(err))
 }
 
+function updateProductRedirect() {
+    let selected_product = document.querySelector("input[type='checkbox']:checked")
+    let product_id = selected_product.dataset.productId
+    window.location.href = `/product/${product_id}`
+    
+}
+
 
 document.querySelectorAll("input[type='checkbox']").forEach(ele => {
     ele.addEventListener('change', toggleActionButtons)
 })
 
 document.querySelector("#btn_delete").addEventListener('click', deleteChecked)
+document.querySelector("#btn_edit").addEventListener('click', updateProductRedirect)

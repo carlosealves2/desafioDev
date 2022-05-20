@@ -3,7 +3,7 @@ import json
 from django.core.exceptions import ObjectDoesNotExist
 from django.forms.models import model_to_dict
 from django.shortcuts import render
-from django.views.generic import CreateView, DetailView
+from django.views.generic import CreateView, DetailView, UpdateView
 
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.decorators import api_view, authentication_classes, permission_classes
@@ -97,3 +97,7 @@ class CreateProductView(CreateView):
 
 class ProductDetailView(DetailView):
     model = Product
+
+class ProductUpdateView(UpdateView):
+    model = Product
+    form_class = ProductForm
