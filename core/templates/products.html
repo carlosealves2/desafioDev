@@ -19,42 +19,42 @@
   {% endif %}
   
     {% for product in product_list %}
-      <div class="card" style="width: 18rem">
+      <div id="{{ product.id }}" class="card" style="width: 18rem">
         <div class="card-body">
           <h5 class="card-title">
             <div class="row">
               <div class="col d-flex justify-content-end w-100">
-                <input type="checkbox" name="" id="" data-product-id="1" />
+                <input type="checkbox" name="" id="" data-product-id="{{ product.id }}" />
               </div>
             </div>
           </h5>
           <h6 class="card-subtitle mb-2 text-muted"></h6>
-          <p class="card-text">product title</p>
+          <p class="card-text">{{ product.name }}</p>
           <p class="text-end">
             <button
               class="btn"
               type="button"
               data-bs-toggle="collapse"
-              data-bs-target="#collapseExample"
+              data-bs-target="#collapse_id_{{ product.id }}"
               aria-expanded="false"
-              aria-controls="collapseExample"
+              aria-controls="collapse_id_{{ product.id }}"
             >
               <span class="material-symbols-outlined"> arrow_circle_down </span>
             </button>
           </p>
-          <div class="collapse" id="collapseExample">
+          <div class="collapse" id="collapse_id_{{ product.id }}">
             <div class="card card-body">
               <div class="row">
                 <div class="col">Quantity</div>
-                <div class="col">9</div>
+                <div class="col">{{ product.quantity_stock }}</div>
               </div>
               <div class="row">
                 <div class="col">Unitary Value</div>
-                <div class="col">1252.99</div>
+                <div class="col">{{ product.unitary_value }}</div>
               </div>
               <div class="row">
                   <div class="col">Situation</div>
-                  <div class="col">avaliable</div>
+                  <div class="col">{{ product.product_situation }}</div>
                 </div>
             </div>
           </div>
