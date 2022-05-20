@@ -1,4 +1,4 @@
-{% extends 'base.html' %} {% block title %} Products {% endblock title %} {%block content %}
+{% extends 'base.html' %} {% load static %} {% block title %} Products {% endblock title %} {%block content %}
 <div class="container">
   <div class="display-5 mx-5 my-5 text-end">Products</div>
   <ul class="nav bg-dark px-2 py-2 justify-content-end rounded-1">
@@ -6,10 +6,10 @@
         <button type="button" class="btn btn-outline-light">New</button>
     </li>
     <li class="nav-item px-2">
-        <button type="button" class="btn btn-outline-light disabled">Delete</button>
+        <button id="btn_delete" type="button" class="btn btn-outline-light disabled">Delete</button>
     </li>
     <li class="nav-item">
-        <button type="button" class="btn btn-outline-light disabled">Edit</button>
+        <button id="btn_edit" type="button" class="btn btn-outline-light disabled">Edit</button>
     </li>
   </ul>
   {% if product_list|length > 0 %}
@@ -19,7 +19,11 @@
   {% endif %}
   
     {% for product in product_list %}
-      <div id="{{ product.id }}" class="card" style="width: 18rem">
+      {% if product.product_situation == "av" %}
+      <div id="prod_id_{{ product.id }}" class="card" style="width: 18rem">
+      {% else %}
+      <div id="prod_id_{{ product.id }}" class="card border-danger mb-3" style="width: 18rem">
+      {% endif %}
         <div class="card-body">
           <h5 class="card-title">
             <div class="row">
@@ -54,7 +58,7 @@
               </div>
               <div class="row">
                   <div class="col">Situation</div>
-                  <div class="col">{{ product.product_situation }}</div>
+                  <div class="col">{{ product.get_product_situation_display }}</div>
                 </div>
             </div>
           </div>
@@ -65,4 +69,16 @@
     {% endfor %}  
     </div>
 </div>
+
+<script src="{% static 'assets/js/card_events.js' %}"></script>
+<script src="{% static 'assets/js/auth.js' %}"></script>
+<script>
+  window.onload = function () {
+    document.querySelectorAll("input[type='checkbox']").forEach(ele => {
+        ele.addEventListener('change', toggleActionButtons)
+    })
+
+    document.querySelector("#btn_delete").addEventListener('click', deleteChecked)
+}
+</script>
 {% endblock content %}
