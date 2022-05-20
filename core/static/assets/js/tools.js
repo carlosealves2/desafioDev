@@ -30,3 +30,10 @@ function closeToast() {
     clearTimeout(timeout)
 
 }
+
+function hidden_offcanva() {
+    var offcanva = document.querySelector('#offcanvaSideMenu')
+    let canva = bootstrap.Offcanvas.getInstance(offcanva)
+    canva.hide()
+
+}
