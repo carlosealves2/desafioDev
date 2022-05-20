@@ -3,6 +3,7 @@ import json
 from django.core.exceptions import ObjectDoesNotExist
 from django.forms.models import model_to_dict
 from django.shortcuts import render
+from django.views.generic import CreateView, DetailView
 
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.decorators import api_view, authentication_classes, permission_classes
@@ -10,6 +11,7 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 
 from .models import Product
+from .forms import ProductForm
 
 
 # Create your views here.
@@ -86,3 +88,12 @@ def product_handler(request):
         except Exception as err:
             print(err)
             return Response({'erro': 'error to collect data'})
+
+
+class CreateProductView(CreateView):
+    model = Product
+    form_class = ProductForm
+
+
+class ProductDetailView(DetailView):
+    model = Product

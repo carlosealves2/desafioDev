@@ -3,7 +3,7 @@
   <div class="display-5 mx-5 my-5 text-end">Products</div>
   <ul class="nav bg-dark px-2 py-2 justify-content-end rounded-1">
     <li class="nav-item">
-        <button type="button" class="btn btn-outline-light">New</button>
+        <a href="{% url 'app:new_product' %}"class="btn btn-outline-light">New</a>
     </li>
     <li class="nav-item px-2">
         <button id="btn_delete" type="button" class="btn btn-outline-light disabled">Delete</button>
