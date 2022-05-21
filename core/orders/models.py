@@ -16,7 +16,7 @@ class Product(models.Model):
     product_situation = models.CharField(_("Product situation"), choices=SITUATION, max_length=2)
 
     def __str__(self):
-        return f"<Product: name: {self.name}, stock: {self.quantity_stock}, situation: {self.product_situation}>"
+        return f"<Product: name: {self.name}, stock: {self.quantity_stock}, situation: {self.get_product_situation_display()}>"
 
     def save(self, force_insert=False, force_update=False, using=None,
              update_fields=None):
@@ -30,7 +30,7 @@ class Product(models.Model):
 
     def get_absolute_url(self):
         return reverse("app:product_detail", kwargs={"pk": self.pk})
-    
+
 
 class Order(models.Model):
     STATUS = (
@@ -56,3 +56,6 @@ class Order(models.Model):
     def __str__(self):
         return f"<Order, product: {self.product}, quantity: {self.quantity}, " \
                f"unitary value: {self.unitary_value}, status: {self.order_situation}>"
+
+    def get_absolute_url(self):
+        return reverse("app:order_detail", kwargs={"pk": self.pk})

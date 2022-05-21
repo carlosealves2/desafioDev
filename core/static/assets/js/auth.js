@@ -1,4 +1,5 @@
-let form = document.querySelector("form#frm_login").addEventListener('submit', login)
+document.querySelector("form#frm_login").addEventListener('submit', login)
+document.querySelector("form#frm_register").addEventListener('submit', register)
 function login(e) {
     e.preventDefault()
     
@@ -110,3 +111,31 @@ function handle_menu(is_auth) {
     }
 }
 
+function register(e) {
+    e.preventDefault()
+    let form_data = new FormData(e.target)
+    let values = JSON.stringify(Object.fromEntries(form_data.entries()))
+    console.log(values)
+    
+    fetch('/auth/users/',{
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: values
+    })
+    .then(data => {
+        if (data.status === 201) {
+            var auth_modal_ele = document.querySelector("#authModal")
+        var modal = bootstrap.Modal.getInstance(auth_modal_ele)
+        modal.hide()
+
+        ToastNotification('Register', "Success, now make login to use recurses!")
+        } else {
+            alert('Failure to register new user')
+        }
+    })
+    .catch(err => {
+        console.error(err)
+    })
+}

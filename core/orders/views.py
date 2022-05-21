@@ -2,16 +2,17 @@ import json
 
 from django.core.exceptions import ObjectDoesNotExist
 from django.forms.models import model_to_dict
+from django.http import HttpResponse
 from django.shortcuts import render
-from django.views.generic import CreateView, DetailView, UpdateView
+from django.views.generic import CreateView, DetailView, UpdateView, ListView
 
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.decorators import api_view, authentication_classes, permission_classes
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 
-from .models import Product
-from .forms import ProductForm
+from .models import Product, Order
+from .forms import ProductForm, OrderForm
 
 
 # Create your views here.
@@ -98,6 +99,30 @@ class CreateProductView(CreateView):
 class ProductDetailView(DetailView):
     model = Product
 
+
 class ProductUpdateView(UpdateView):
     model = Product
     form_class = ProductForm
+
+
+class ListOrders(ListView):
+    model = Order
+    context_object_name = "order_list"
+
+
+def create_order(request):
+    if request.method == "POST":
+        form = OrderForm(request.POST)
+        if form.is_valid():
+            product: Product = form.cleaned_data['product']
+            want_qtd = form.cleaned_data['quantity']
+            if product.product_situation == 'un':
+                return HttpResponse(form.cleaned_data)
+            form.save()
+    else:
+        return render(request, 'orders/order_form.html', {
+            'form': OrderForm()
+        })
+
+class DetailOrder(DetailView):
+    model = Order

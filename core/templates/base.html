@@ -67,7 +67,7 @@
                 class="list-group-item list-group-item-action"
                 >Products</a
               >
-              <a href="#" class="list-group-item list-group-item-action"
+              <a href="{% url 'app:orders' %}" class="list-group-item list-group-item-action"
                 >Order</a
               >
               <a
@@ -184,7 +184,7 @@
                 role="tabpanel"
                 aria-labelledby="register-tab"
               >
-                <form action="" method="post" class="mx-3 my-3">
+                <form id="frm_register" action="" method="post" class="mx-3 my-3">
                   <!-- form register -->
                   <div class="mb-3 row">
                     <label
@@ -196,7 +196,8 @@
                       <input
                         type="text"
                         class="form-control"
-                        id="registerStaticEmail"
+                        id="email"
+                        name="email"
                       />
                     </div>
                   </div>
@@ -210,7 +211,8 @@
                       <input
                         type="text"
                         class="form-control"
-                        id="registerStaticUsername"
+                        id="username"
+                        name="username"
                       />
                     </div>
                   </div>
@@ -225,20 +227,22 @@
                         type="password"
                         class="form-control"
                         id="registerInputPassword"
+                        name="password"
                       />
                     </div>
                   </div>
+                  <div class="d-grid gap-2">
+                    <button
+                      id="btn_register_handle"
+                      type="submit"
+                      class="btn btn-primary"
+                    >
+                      Register
+                    </button>
+                  </div>
                   <!-- form register -->
                 </form>
-                <div class="d-grid gap-2">
-                  <button
-                    id="btn_register_handle"
-                    type="button"
-                    class="btn btn-primary"
-                  >
-                    Register
-                  </button>
-                </div>
+                
               </div>
             </div>
           </div>

@@ -1,0 +1,55 @@
+{% extends 'base.html' %} {% block content %}
+<div class="container">
+  <div class="display-5 mx-5 my-5 text-end">Orders List</div>
+  <div class="row justify-content-center px-4 py-4">
+    <ul class="nav justify-content-end">
+      <li class="nav-item">
+        <a class="nav-link active" href="{% url 'app:new_order' %}">New order</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Delete</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Edit</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#"
+          >Disabled</a
+        >
+      </li>
+    </ul>
+    <table class="table">
+      {% if order_list|length > 0 %}
+      <thead>
+        <tr>
+          <th scope="col">id</th>
+          <th scope="col">Product</th>
+          <th scope="col">Quantity</th>
+          <th scope="col">Unit. value</th>
+          <th scope="col">Total value</th>
+          <th scope="col">Details</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for order in order_list %}
+        <tr>
+          <th scope="row">{{ order.id }}</th>
+          <td>{{ order.product.name }}</td>
+          <td>{{ order.quantity }}</td>
+          <td>{{ order.unitary_value }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    {% else %}
+    <nav class="navbar navbar-light bg-light">
+      <div class="container-fluid">
+        <span class="navbar-text">
+          <h4>no orders were created.</h4>
+        </span>
+      </div>
+    </nav>
+    {% endif %}
+  </div>
+</div>
+{% endblock content %}

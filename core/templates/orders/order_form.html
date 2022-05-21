@@ -1,0 +1,25 @@
+{% extends 'base.html' %} 
+{% block content %}
+<div class="container">
+    <div class="display-5 mx-5 my-5 text-end">Orders List</div>
+        <div class="row justify-content-start px-4 py-4">
+            <div class="col-6">
+                <form action="" method="post">
+                    {% csrf_token %}
+                    <div class="custom-grid">
+                        {% for field in form %}
+                        <div class="mb-3">
+                            {{ field.label }}
+                            {{field}}
+                        </div>
+                        {% endfor %}
+                    </div>
+                    <input type="submit" value="Save" class="btn btn-primary">
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}
+
